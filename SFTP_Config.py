@@ -4,11 +4,7 @@ from base64 import decodebytes
 import sys
 from datetime import datetime
 import os
-
-
-myHostname = "access793895954.webspace-data.io"
-myUsername = "u98187406-antoine"
-myPassword = "Test.antoine1234"
+import config.py
 
 cnopts = pysftp.CnOpts()
 
