@@ -4,7 +4,7 @@ from base64 import decodebytes
 import sys
 from datetime import datetime
 import os
-import config.py
+from config import *
 
 cnopts = pysftp.CnOpts()
 
@@ -17,21 +17,35 @@ if cnopts.hostkeys.lookup(myHostname) == None:
     # And do not verify host key of the new host
     cnopts.hostkeys = None
 
-# dn = datetime.now().strftime("%Y%m%d%H");
 remotePath = "./"
 
-with pysftp.Connection(host=myHostname, username=myUsername, password=myPassword,  cnopts=cnopts) as sftp:
-    if hostkeys != None:
-        print("Connecté au nouvel hôte, mettant en cache sa clé d'hôte")
-        hostkeys.add(myHostname, sftp.remote_server_key.get_name(), sftp.remote_server_key)
-        hostkeys.save(pysftp.helpers.known_hosts())
-    else:
-        print("Connexion établie avec succès ...")
-        myFileList = sftp.listdir(remotePath)
-        for filename in myFileList:
-           print(filename)
-           print(os.path.isdir(remotePath + filename))
-           # print(myFileList)
-           # if (filename.rfind('./' + dn) != -1):
-           #     print('blablabla')
-           #     sftp.get("./" + filename, "/tmp/" + filename)
+class Host_name_connect():
+    def __init__(self):
+        self.date = datenow = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
+        self.host = myHostname
+        self.username = myUsername
+        self.password = myPassword
+
+    def connexion(self):
+        with pysftp.Connection(host=self.host, username=self.username, password=self.password,  cnopts=cnopts) as sftp:
+            if hostkeys != None:
+                print('\033[32m' + 'Connected to new host, caching its hostkey please restart the scripts')
+                hostkeys.add(myHostname, sftp.remote_server_key.get_name(), sftp.remote_server_key)
+                hostkeys.save(pysftp.helpers.known_hosts())
+            else:
+                print('\033[32m' + self.date + ' Connection established successfully ...' + '\033[0m')
+                myFileList = sftp.listdir(remotePath)
+                for filename in myFileList:
+                    print(filename)
+                    print(os.path.isdir(remotePath))
+
+
+
+    #datenow = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
+            # print(myFileList)
+            # if (filename.rfind('./' + dn) != -1):
+            #     print('blablabla')
+            #     sftp.get("./" + filename, "/tmp/" + filename)
+
+hostname = Host_name_connect()
+hostname.connexion()
