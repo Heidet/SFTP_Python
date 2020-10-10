@@ -11,7 +11,7 @@ cnopts = pysftp.CnOpts()
 hostkeys = None
 
 if cnopts.hostkeys.lookup(myHostname) == None:
-    print("New host - will accept any host key")
+    print('\033[32m' + "New host - will accept any host key")
     # Backup loaded .ssh/known_hosts file
     hostkeys = cnopts.hostkeys
     # And do not verify host key of the new host
@@ -38,8 +38,6 @@ class Host_name_connect():
                 for filename in myFileList:
                     print(filename)
                     print(os.path.isdir(remotePath))
-
-
 
     #datenow = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
             # print(myFileList)
