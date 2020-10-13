@@ -4,7 +4,7 @@ from base64 import decodebytes
 import sys
 from datetime import datetime
 import os
-from config import *
+from conf.config import *
 
 cnopts = pysftp.CnOpts()
 
@@ -21,7 +21,7 @@ remotePath = "./"
 
 class Host_name_connect():
     def __init__(self):
-        self.date = datenow = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
+        self.date = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
         self.host = myHostname
         self.username = myUsername
         self.password = myPassword
@@ -39,11 +39,7 @@ class Host_name_connect():
                     print(filename)
                     print(os.path.isdir(remotePath))
 
-    #datenow = datetime.now().strftime('%d/%m/%Y %H:%M:%S');
             # print(myFileList)
             # if (filename.rfind('./' + dn) != -1):
             #     print('blablabla')
             #     sftp.get("./" + filename, "/tmp/" + filename)
-
-hostname = Host_name_connect()
-hostname.connexion()
