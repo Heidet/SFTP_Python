@@ -1,5 +1,5 @@
 import os
-from conf.sftpconfig import *
+from conf.sftpconfig import Host_name_connect
 
 
 
@@ -11,5 +11,5 @@ myUsername = input()
 print('Please enter the password :')
 myPassword = input() 
 
-hostname = Host_name_connect()
+hostname = Host_name_connect(myHostname,myUsername,myPassword)
 hostname.connexion()
